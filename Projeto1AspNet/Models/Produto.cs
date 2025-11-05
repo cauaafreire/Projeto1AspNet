@@ -1,4 +1,5 @@
-﻿namespace Projeto1AspNet.Models
+﻿
+namespace Projeto1AspNet.Models
 {
     public class Produto
     {
