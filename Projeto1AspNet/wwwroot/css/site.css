@@ -26,3 +26,12 @@ body {
     height: 40px;
     border-radius: 50%;
 }
+
+nav {
+    background: #003399;
+    color:white;
+}
+
+nav li {
+    color:white;
+}
