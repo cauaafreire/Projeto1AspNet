@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Projeto1AspNet.Models;
 using Projeto1AspNet.Repositorio;
-using MySqlX.XDevAPI;
 
 namespace Projeto1AspNet.Controllers
 {
@@ -24,12 +23,12 @@ namespace Projeto1AspNet.Controllers
         {
             /* Retorna a View padrão associada a esta Action,
              passando como modelo a lista de todos os clientes obtida do repositório.*/
-            return View(_produtoRepositorio.TodosClientes());
+            return View(_produtoRepositorio.TodosProdutos());
         }
 
 
         /* Action para exibir o formulário de cadastro de cliente (via Requisição GET)*/
-        public IActionResult CadastrarCliente()
+        public IActionResult CadastrarProduto()
         {
             //retorna a Página
             return View();
@@ -37,13 +36,13 @@ namespace Projeto1AspNet.Controllers
 
         // Action que recebe e processa os dados que serão enviados pelo formulário de cadastro de cliente (via Requisição POST)
         [HttpPost]
-        public IActionResult CadastrarCliente(Cliente cliente)
+        public IActionResult CadastrarProduto(Produto produto)
         {
 
             /* O parâmetro 'cliente' recebe os dados enviados pelo formulário,
              que são automaticamente mapeados para as propriedades da classe Cliente.
              Chama o método no repositório para cadastrar o novo cliente no sistema.*/
-            _clienteRepositorio.Cadastrar(cliente);
+            _produtoRepositorio.Cadastrar(produto);
 
             //redireciona para pagina Index 'nameof(Index)' garante que o nome da Action seja usado corretamente,
             return RedirectToAction(nameof(Index));
@@ -51,20 +50,20 @@ namespace Projeto1AspNet.Controllers
 
         /* Action para exibir o formulário de edição de um cliente específico (via Requisição GET)
          Este método recebe o 'id' do cliente a ser editado como parâmetro.*/
-        public IActionResult EditarCliente(int id)
+        public IActionResult EditarProduto(int id)
         {
             // Obtém o cliente específico do repositório usando o ID fornecido.
-            var cliente = _clienteRepositorio.ObterCliente(id);
+            var produto = _produtoRepositorio.ObterProduto(id);
 
             // Verifica se o cliente foi encontrado. É uma boa prática tratar casos onde o ID é inválido.
-            if (cliente == null)
+            if (produto == null)
             {
                 // Você pode retornar um NotFound (código de status 404) ou outra resposta apropriada.
                 return NotFound();
             }
 
             // Retorna a View associada a esta Action (EditarCliente.cshtml),
-            return View(cliente);
+            return View(produto);
         }
 
 
@@ -75,10 +74,10 @@ namespace Projeto1AspNet.Controllers
         /*[Bind] para especificar explicitamente quais propriedades do objeto Cliente podem ser vinculadas a partir dos dados do formulário.
         Isso é uma boa prática de segurança para evitar o overposting (onde um usuário malicioso pode enviar dados para propriedades
         que você não pretendia que fossem alteradas)*/
-        public IActionResult EditarCliente(int id, [Bind("CodCli, NomeCli,TelCli,EmailCli")] Cliente cliente)
+        public IActionResult EditarProduto(int id, [Bind("id, Nome, Descriçao, Preco")] Produto produto)
         {
             // Verifica se o ID fornecido na rota corresponde ao ID do cliente no modelo.
-            if (id != cliente.CodCli)
+            if (id != produto.Id)
             {
                 return BadRequest(); // Retorna um erro 400 se os IDs não corresponderem.
             }
@@ -88,7 +87,7 @@ namespace Projeto1AspNet.Controllers
                 try
                 {
                     // Verifica se o cliente com o Codigo fornecido existe no repositório.
-                    if (_clienteRepositorio.Atualizar(cliente))
+                    if (_produtoRepositorio.Atualizar(produto))
                     {
                         //redireciona para a pagina index quando alterar
                         return RedirectToAction(nameof(Index));
@@ -99,18 +98,18 @@ namespace Projeto1AspNet.Controllers
                     // Adiciona um erro ao ModelState para exibir na View.
                     ModelState.AddModelError("", "Ocorreu um erro ao Editar.");
                     // Retorna a View com o modelo para exibir a mensagem de erro e os dados do formulário.
-                    return View(cliente);
+                    return View(produto);
                 }
             }
             // Se o ModelState não for válido, retorna a View com os erros de validação.
-            return View(cliente);
+            return View(produto);
         }
 
 
         public IActionResult ExcluirCliente(int id)
         {
             // Obtém o cliente específico do repositório usando o Codigo fornecido.
-            _clienteRepositorio.Excluir(id);
+            _produtoRepositorio.Excluir(id);
             // Retorna a View de confirmação de exclusão, passando o cliente como modelo.
             return RedirectToAction(nameof(Index));
         }

@@ -1,14 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using Projeto1AspNet.Models;
-using System.Configuration;
 using System.Data;
 
 namespace Projeto1AspNet.Repositorio
 {
-    public class ProdutoRepositorio(IConfiguration configuration)
-    {
-        public class produtoRepositorio(IConfiguration configuration)
+
+        public class ProdutoRepositorio(IConfiguration configuration)
         {
             // Declara uma variável privada somente leitura para armazenar a string de conexão com o MySQL
             private readonly string _conexaoMySQL = configuration.GetConnectionString("ConexaoMySQL");
@@ -23,7 +20,7 @@ namespace Projeto1AspNet.Repositorio
                     // Abre a conexão com o banco de dados MySQL
                     conexao.Open();
                     // Cria um novo comando SQL para inserir dados na tabela 'cliente'
-                    MySqlCommand cmd = new MySqlCommand("insert into Produto (Nome,Descriçao,Preco) values (@nome, @descricao, @preco)", conexao); // @: PARAMETRO
+                    MySqlCommand cmd = new MySqlCommand("insert into Produtos (Nome,Descriçao,Preco) values (@nome, @descricao, @preco)", conexao); // @: PARAMETRO
                                                                                                                                                      // Adiciona um parâmetro para o nome, definindo seu tipo e valor
                     cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = produto.Nome;
                     // Adiciona um parâmetro para o telefone, definindo seu tipo e valor
@@ -48,7 +45,7 @@ namespace Projeto1AspNet.Repositorio
                         // Abre a conexão com o banco de dados MySQL
                         conexao.Open();
                         // Cria um novo comando SQL para atualizar dados na tabela 'cliente' com base no código
-                        MySqlCommand cmd = new MySqlCommand("Update Produto set Nome=@nome, Descriçao=@descricao, Preco=@preco " + " where Id=@id ", conexao);
+                        MySqlCommand cmd = new MySqlCommand("Update Produtos set Nome=@nome, Descriçao=@descricao, Preco=@preco " + " where Id=@id ", conexao);
                         // Adiciona um parâmetro para o código do cliente a ser atualizado, definindo seu tipo e valor
                         cmd.Parameters.Add("@codigo", MySqlDbType.Int32).Value = produto.Id;
                         // Adiciona um parâmetro para o novo nome, definindo seu tipo e valor
@@ -67,12 +64,13 @@ namespace Projeto1AspNet.Repositorio
                 catch (MySqlException ex)
                 {
                     // Logar a exceção (usar um framework de logging como NLog ou Serilog)
-                    Console.WriteLine($"Erro ao atualizar cliente: {ex.Message}");
+                    Console.WriteLine($"Erro ao atualizar produto: {ex.Message}");
                     return false; // Retorna false em caso de erro
 
                 }
             }
 
+            
             // Método para listar todos os clientes do banco de dados
             public IEnumerable<Produto> TodosProdutos()
             {
@@ -85,7 +83,7 @@ namespace Projeto1AspNet.Repositorio
                     // Abre a conexão com o banco de dados MySQL
                     conexao.Open();
                     // Cria um novo comando SQL para selecionar todos os registros da tabela 'cliente'
-                    MySqlCommand cmd = new MySqlCommand("SELECT * from Produto", conexao);
+                    MySqlCommand cmd = new MySqlCommand("SELECT * from Produtos", conexao);
 
                     // Cria um adaptador de dados para preencher um DataTable com os resultados da consulta
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -106,13 +104,15 @@ namespace Projeto1AspNet.Repositorio
                                         Id = Convert.ToInt32(dr["Id"]), // Converte o valor da coluna "codigo" para inteiro
                                         Nome = ((string)dr["Nome"]), // Converte o valor da coluna "nome" para string
                                         Descricao = ((string)dr["Descricao"]), // Converte o valor da coluna "telefone" para string
-                                        Preco = ((string)dr["EmailCli"]), // Converte o valor da coluna "email" para string
+                                        Preco = ((decimal)dr["preco"]), // Converte o valor da coluna "email" para string
                                     });
                     }
                     // Retorna a lista de todos os clientes
                     return Produtolist;
                 }
             }
+            
+
 
             // Método para buscar um cliente específico pelo seu código (Codigo)
             public Produto ObterProduto(int id)
@@ -123,7 +123,7 @@ namespace Projeto1AspNet.Repositorio
                     // Abre a conexão com o banco de dados MySQL
                     conexao.Open();
                     // Cria um novo comando SQL para selecionar um registro da tabela 'cliente' com base no código
-                    MySqlCommand cmd = new MySqlCommand("SELECT * from cliente where CodCli=@codigo ", conexao);
+                    MySqlCommand cmd = new MySqlCommand("SELECT * Produtos where Id = @id ", conexao);
 
                     // Adiciona um parâmetro para o código a ser buscado, definindo seu tipo e valor
                     cmd.Parameters.AddWithValue("@id", id);
@@ -147,7 +147,7 @@ namespace Projeto1AspNet.Repositorio
                         produto.Id = Convert.ToInt32(dr["Id"]);//propriedade Codigo e convertendo para int
                         produto.Nome = (string)(dr["Nome"]); // propriedade Nome e passando string
                         produto.Descricao = (string)(dr["Descricao"]); //propriedade telefone e passando string
-                        produto.Preco = (string)(dr["Preco"]); //propriedade email e passando string
+                        produto.Preco = (decimal)(dr["Preco"]); //propriedade email e passando string
                     }
                     // Retorna o objeto Cliente encontrado (ou um objeto com valores padrão se não encontrado)
                     return produto;
@@ -165,10 +165,10 @@ namespace Projeto1AspNet.Repositorio
                     conexao.Open();
 
                     // Cria um novo comando SQL para deletar um registro da tabela 'cliente' com base no código
-                    MySqlCommand cmd = new MySqlCommand("delete from cliente where CodCli=@codigo", conexao);
+                    MySqlCommand cmd = new MySqlCommand("delete from Produtos where id=@id", conexao);
 
                     // Adiciona um parâmetro para o código a ser excluído, definindo seu tipo e valor
-                    cmd.Parameters.AddWithValue("@codigo", Id);
+                    cmd.Parameters.AddWithValue("@id", Id);
 
                     // Executa o comando SQL de exclusão e retorna o número de linhas afetadas
                     int i = cmd.ExecuteNonQuery();
@@ -177,5 +177,4 @@ namespace Projeto1AspNet.Repositorio
                 }
             }
         }
-    }
 }
