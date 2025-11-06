@@ -34,7 +34,7 @@ namespace Projeto1AspNet.Controllers
 
             if (usuario != null && usuario.Senha == senha)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Produto");
             }
             ModelState.AddModelError("", "Email / senha Inválidos");
 
