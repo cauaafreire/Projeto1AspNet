@@ -121,7 +121,7 @@ namespace Projeto1AspNet.Repositorio
 
 
             // Método para buscar um cliente específico pelo seu código (Codigo)
-            public Produto ObterProduto(int CodProd)
+            public Produto ObterProduto(int Codigo)
             {
                 // Bloco using para garantir que a conexão seja fechada e os recursos liberados após o uso
                 using (var conexao = new MySqlConnection(_conexaoMySQL))
@@ -129,10 +129,10 @@ namespace Projeto1AspNet.Repositorio
                     // Abre a conexão com o banco de dados MySQL
                     conexao.Open();
                     // Cria um novo comando SQL para selecionar um registro da tabela 'cliente' com base no código
-                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM Produtos where CodProd=@CodProd ", conexao);
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM Produtos where CodProd=@codigo ", conexao);
 
                     // Adiciona um parâmetro para o código a ser buscado, definindo seu tipo e valor
-                    cmd.Parameters.AddWithValue("@CodProd", CodProd);
+                    cmd.Parameters.AddWithValue("@codigo", Codigo);
 
                     // Cria um adaptador de dados (não utilizado diretamente para ExecuteReader)
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -163,7 +163,7 @@ namespace Projeto1AspNet.Repositorio
 
 
             // Método para excluir um cliente do banco de dados pelo seu código (ID)
-            public void Excluir(int CodProd)
+            public void Excluir(int Id)
             {
                 // Bloco using para garantir que a conexão seja fechada e os recursos liberados após o uso
                 using (var conexao = new MySqlConnection(_conexaoMySQL))
@@ -172,10 +172,10 @@ namespace Projeto1AspNet.Repositorio
                     conexao.Open();
 
                     // Cria um novo comando SQL para deletar um registro da tabela 'cliente' com base no código
-                    MySqlCommand cmd = new MySqlCommand("delete from Produtos where CodProd=@codprod", conexao);
+                    MySqlCommand cmd = new MySqlCommand("delete from Produtos where CodProd=@codigo", conexao);
 
                     // Adiciona um parâmetro para o código a ser excluído, definindo seu tipo e valor
-                    cmd.Parameters.AddWithValue("@CodProd", CodProd);
+                    cmd.Parameters.AddWithValue("@codigo", Id);
 
                     // Executa o comando SQL de exclusão e retorna o número de linhas afetadas
                     int i = cmd.ExecuteNonQuery();

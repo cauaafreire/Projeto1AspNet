@@ -12,11 +12,12 @@ CREATE TABLE Usuario(
     Senha varchar(40)not null
 );
 
+
 CREATE TABLE Produtos (
-	id int primary key auto_increment,
+	CodProd int primary key auto_increment,
     Nome varchar(40) not null,
-    Descriçao mediumtext not null,
-    Preco decimal (10, 2) not null,
+    Descricao mediumtext not null,
+    Preco int not null,
     Quantidade int not null
 );
 
