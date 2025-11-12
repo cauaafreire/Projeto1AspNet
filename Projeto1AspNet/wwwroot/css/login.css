@@ -12,7 +12,7 @@
 }
 
 .login-form {
-    width: 300px;
+    width: 600px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -43,6 +43,7 @@
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
+    margin-top:10px;
     cursor: pointer;
     width: 100%;
     transition: 0.1s color ease;

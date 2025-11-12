@@ -36,6 +36,16 @@ nav li {
     color:white;
 }
 
-.nav-item {
+.nav-item-1 {
     margin-left:20px;
+}
+
+a:hover {
+    color: #bebebe;
+    transition: 0.5s color ease;
+}
+
+nav-item, nav-item-1 {
+    color: #bebebe;
+    transition: 0.5s color ease;
 }
