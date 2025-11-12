@@ -17,7 +17,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    background: #f4f4f4;    
+    background: #f4f4f4;
 }
 
 .form-group {
@@ -43,7 +43,7 @@
     align-items: center;
 }
 
-.btn-success {
+.btn-warning {
     background: #008300;
     color: #fff;
     padding: 10px 15px;
@@ -56,36 +56,13 @@
     justify-content: center;
     align-items: center;
 }
-
-.btn-success:hover {
+.btn-warning:hover {
     background: #006400;
+    color: #fff;
     transition: 0.5s color ease;
 }
 
 .btn-danger {
-    display: inline-flex;
-    background: #be0000;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 120px;
-    transition: 0.1s color ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left:20px;
-}
-
-    .btn-danger:hover {
-        background: #870000;
-        transition: 0.5s color ease;
-    }
-
-
-.btn-danger {
-    display: inline-flex;
     background: #be0000;
     color: #fff;
     padding: 10px 15px;
@@ -100,8 +77,8 @@
     margin-left: 20px;
 }
 
-    .btn-danger:hover {
-        background: #870000;
-        transition: 0.5s color ease;
-    }
-
+.btn-danger:hover {
+   background: #870000;
+   color: #fff;
+   transition: 0.5s color ease;
+}

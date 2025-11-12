@@ -1,7 +1,6 @@
 ﻿@model Projeto1AspNet.Models.Produto;
 
-
-<link href="~/css/editarcli.css" rel="stylesheet" />
+<link href="~/css/editarprod.css" rel="stylesheet" />
 
 <h1 class="titulo-prod">Editar Produto</h1>
 
@@ -18,41 +17,41 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <input type="hidden" asp-for="CodProd" class="form-control" />
+                <input type="hidden" asp-for="CodProd" class="form-control" required/>
                 <span asp-validation-for="CodProd" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" class="form-control" required/>
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <input asp-for="Descricao" class="form-control" required/>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Preco" class="control-label"></label>
-                <input asp-for="Preco" class="form-control" />
+                <input asp-for="Preco" class="form-control" required/>
                 <span asp-validation-for="Preco" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="quantidade" class="control-label"></label>
-                <input asp-for="quantidade" class="form-control" />
+                <input asp-for="quantidade" class="form-control" required/>
                 <span asp-validation-for="quantidade" class="text-danger"></span>
             </div>
 
             <div class="btn">
                 <div class="form-group">
-                    <input type="submit" value="Alterar" class="btn btn-primary" />
+                    <input type="submit" value="Alterar" class="btn btn-warning" />
                 </div>
 
                 <div class="form-group">
-                    <a asp-action="Index" class="btn btn-success">Voltar</a>
+                    <a asp-action="Index" class="btn btn-danger">Voltar</a>
                 </div>
             </div>
         </form>
