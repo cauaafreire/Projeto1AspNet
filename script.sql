@@ -12,7 +12,6 @@ CREATE TABLE Usuario(
     Senha varchar(40)not null
 );
 
-
 CREATE TABLE Produtos (
 	CodProd int primary key auto_increment,
     Nome varchar(40) not null,

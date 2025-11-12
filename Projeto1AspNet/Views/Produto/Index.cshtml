@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Projeto1AspNet.Models.Produto>
 
-
+<link href="~/css/listaprod.css" rel="stylesheet" />
 
 <p>
     <a asp-controller="Produto" asp-action="CadastrarProduto" class="btn btn-primary">Cadastrar Produto</a>
@@ -21,7 +21,7 @@
                 @Html.DisplayNameFor(model => model.Preco)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quantidade)
+                @Html.DisplayNameFor(model => model.Quantidade)
             </th>
             <th class="text-center">Ação</th>
         </tr>
@@ -43,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.Preco)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.quantidade)
+                    @Html.DisplayFor(modelItem => item.Quantidade)
                 </td>
                 <td class="text-center">
                     <a asp-controller="Produto" asp-action="EditarProduto" asp-route-id="@item.CodProd" class="btn btn-sm btn-warning">Editar</a>

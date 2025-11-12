@@ -22,14 +22,15 @@ body {
 }
 
 #logo {
-    width:50px;
-    height: 50px;
+    width:100px;
+    height: 40px;
     border-radius: 50%;
 }
 
 nav {
     background: #003399;
     color:white;
+    position:fixed;
 }
 
 nav li {
@@ -45,7 +46,11 @@ a:hover {
     transition: 0.5s color ease;
 }
 
-nav-item, nav-item-1 {
+.nav-item, .nav-item-1 {
     color: #bebebe;
     transition: 0.5s color ease;
+}
+footer {
+    background: #003399;
+    color:white;
 }

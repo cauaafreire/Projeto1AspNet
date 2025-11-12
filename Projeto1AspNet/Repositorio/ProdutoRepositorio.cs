@@ -28,7 +28,7 @@ namespace Projeto1AspNet.Repositorio
                     // Adiciona um parâmetro para o email, definindo seu tipo e valor
                     cmd.Parameters.Add("@preco", MySqlDbType.Int32).Value = produto.Preco;
                     // Adiciona um parâmetro para o quantidade, definindo seu tipo e valor
-                    cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.quantidade;
+                    cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.Quantidade;
                     // Executa o comando SQL de inserção e retorna o número de linhas afetadas
                     cmd.ExecuteNonQuery();
                     // Fecha explicitamente a conexão com o banco de dados (embora o 'using' já faça isso)
@@ -57,7 +57,7 @@ namespace Projeto1AspNet.Repositorio
                         // Adiciona um parâmetro para o novo email, definindo seu tipo e valor
                         cmd.Parameters.Add("@preco", MySqlDbType.Int32).Value = produto.Preco;
                         // Adiciona um parâmetro para o novo quantidade, definindo seu tipo e valor
-                        cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.quantidade;
+                        cmd.Parameters.Add("@quantidade", MySqlDbType.Int32).Value = produto.Quantidade;
                         // Executa o comando SQL de atualização e retorna o número de linhas afetadas
                         //executa e verifica se a alteração foi realizada
                         int linhasAfetadas = cmd.ExecuteNonQuery();
@@ -109,7 +109,7 @@ namespace Projeto1AspNet.Repositorio
                                         Nome = ((string)dr["Nome"]), // Converte o valor da coluna "nome" para string
                                         Descricao = ((string)dr["Descricao"]), // Converte o valor da coluna "telefone" para string
                                         Preco = Convert.ToInt32(dr["Preco"]), // Converte o valor da coluna "email" para string
-                                        quantidade = Convert.ToInt32(dr["Quantidade"]), // Converte o valor da coluna "email" para string
+                                        Quantidade = Convert.ToInt32(dr["Quantidade"]), // Converte o valor da coluna "email" para string
                                     }  
                         );
                     }
@@ -154,7 +154,7 @@ namespace Projeto1AspNet.Repositorio
                         produto.Nome = (string)(dr["Nome"]); // propriedade Nome e passando string
                         produto.Descricao = (string)(dr["Descricao"]); //propriedade telefone e passando string
                         produto.Preco = Convert.ToInt32(dr["Preco"]); //propriedade email e passando string
-                        produto.quantidade = Convert.ToInt32(dr["Quantidade"]); // Converte o valor da coluna "email" para string
+                        produto.Quantidade = Convert.ToInt32(dr["Quantidade"]); // Converte o valor da coluna "email" para string
                     }
                     // Retorna o objeto Cliente encontrado (ou um objeto com valores padrão se não encontrado)
                     return produto;
